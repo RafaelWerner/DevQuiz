@@ -8,7 +8,6 @@ class ChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ,
       height: 80,
       width: 80,
       child: Stack(

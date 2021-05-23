@@ -1,4 +1,3 @@
-import 'package:devquiz/core/app_colors.dart';
 import 'package:devquiz/home/home_controller.dart';
 import 'package:devquiz/home/home_state.dart';
 import 'package:devquiz/home/widgets/appbar/app_bar_widget.dart';

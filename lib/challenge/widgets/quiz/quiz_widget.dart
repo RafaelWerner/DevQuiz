@@ -1,43 +1,39 @@
-import 'package:devquiz/challenge/widgets/answer/answer_widget.dart';
-import 'package:devquiz/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
+import 'package:devquiz/challenge/widgets/answer/answer_widget.dart';
+import 'package:devquiz/core/app_text_styles.dart';
+import 'package:devquiz/shared/models/question_model.dart';
+
 class QuizWidget extends StatelessWidget {
-  final String title;
-  const QuizWidget({Key? key, required this.title}) : super(key: key);
+  final QuestionModel question;
+  const QuizWidget({
+    Key? key,
+    required this.question,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
+          SizedBox(
+            height: 64,
+          ),
           Text(
-            title,
+            question.title,
             style: AppTextStyles.heading,
           ),
           SizedBox(
             height: 24,
           ),
-          AnswerWidget(
-              title:
-                  'Teste da pergunta bem comprida que deve utilizar mais de uma linha na tela do app.',
-              isRight: false,
-              isSelected: true),
-          AnswerWidget(
-              title:
-                  'Teste da pergunta bem comprida que deve utilizar mais de uma linha na tela do app.',
-              isRight: false,
-              isSelected: false),
-          AnswerWidget(
-              title:
-                  'Teste da pergunta bem comprida que deve utilizar mais de uma linha na tela do app.',
-              isRight: false,
-              isSelected: false),
-          AnswerWidget(
-              title:
-                  'Teste da pergunta bem comprida que deve utilizar mais de uma linha na tela do app.',
-              isRight: false,
-              isSelected: false)
+          ...question.answers
+              .map(
+                (e) => AnswerWidget(
+                  title: e.title,
+                  isRight: e.isRight,
+                ),
+              )
+              .toList(),
         ],
       ),
     );

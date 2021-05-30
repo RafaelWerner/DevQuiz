@@ -11,7 +11,7 @@ class AnswerWidget extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.isRight,
-      required this.isSelected})
+      this.isSelected = false})
       : super(key: key);
 
   Color get _selectedColorRight =>

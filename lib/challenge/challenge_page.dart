@@ -1,3 +1,4 @@
+import 'package:devquiz/challenge/challenge_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:devquiz/challenge/widgets/next_button/next_button_widget.dart';
@@ -18,19 +19,52 @@ class ChallengePage extends StatefulWidget {
 }
 
 class _ChallengePageState extends State<ChallengePage> {
+  final controller = ChallengeController();
+  final pageController = PageController();
+
+  @override
+  void initState() {
+    controller.currentQuestionNumberNotifier.addListener(() {
+      setState(() {});
+    });
+    pageController.addListener(() {
+      controller.currentQuestionNumber = pageController.page!.toInt() + 1;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(88),
+          preferredSize: Size.fromHeight(106),
           child: SafeArea(
             top: true,
-            child: QuestionIndicatorWidget(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                ValueListenableBuilder<int>(
+                  valueListenable: controller.currentQuestionNumberNotifier,
+                  builder: (context, value, _) => QuestionIndicatorWidget(
+                    questionNumber: value,
+                    questionsLength: widget.questions.length,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        body: QuizWidget(
-          question: widget.questions[0],
+        body: PageView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: pageController,
+          children:
+              widget.questions.map((e) => QuizWidget(question: e)).toList(),
         ),
         bottomNavigationBar: SafeArea(
           child: Padding(
@@ -40,7 +74,11 @@ class _ChallengePageState extends State<ChallengePage> {
               children: [
                 NextButtonWidget.white(
                   label: "Pular",
-                  onTap: () {},
+                  onTap: () {
+                    pageController.nextPage(
+                        duration: Duration(milliseconds: 250),
+                        curve: Curves.linear);
+                  },
                 ),
                 SizedBox(
                   width: 7,

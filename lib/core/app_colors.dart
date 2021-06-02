@@ -21,6 +21,11 @@ class AppColors {
   static final Color red = Color(0xFFE5C5CF);
   static final Color darkRed = Color(0xFFCC3750);
 
+  //Blues
+  static final Color lightBlue = Color(0xFF6DB3F2);
+  static final Color blue = Color(0XFF3690F0);
+  static final Color darkBlue = Color(0XFF1E69DE);
+
   //LevelButton
   static final Color levelButtonFacil = Color(0xFFEBEBFC);
   static final Color levelButtonMedio = lightGreen;

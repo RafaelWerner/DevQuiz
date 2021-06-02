@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               SizedBox(
-                height: 24,
+                height: 38,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage> {
                 height: 24,
               ),
               Expanded(
+                flex: 8,
                 child: GridView.count(
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
@@ -73,11 +74,13 @@ class _HomePageState extends State<HomePage> {
                           percent: (e.questionAnswered / e.questions.length),
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChallengePage(
-                                          questions: e.questions,
-                                        )));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChallengePage(
+                                  questions: e.questions,
+                                ),
+                              ),
+                            );
                           },
                         ),
                       )

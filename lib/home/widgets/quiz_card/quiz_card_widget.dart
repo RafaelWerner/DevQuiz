@@ -30,9 +30,10 @@ class QuizCardWidget extends StatelessWidget {
             BorderSide(color: AppColors.border),
           ),
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
@@ -40,30 +41,27 @@ class QuizCardWidget extends StatelessWidget {
               width: 40,
               child: Image.asset(AppImages.blocks),
             ),
-            SizedBox(
-              height: 20,
-            ),
             Text(
               title,
               style: AppTextStyles.heading15,
             ),
-            SizedBox(
-              height: 18,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    completed,
-                    style: AppTextStyles.body11,
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      completed,
+                      style: AppTextStyles.body11,
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: ProgressIndicatorWidget(value: percent),
-                )
-              ],
+                  Expanded(
+                    flex: 4,
+                    child: ProgressIndicatorWidget(value: percent),
+                  )
+                ],
+              ),
             )
           ],
         ),
